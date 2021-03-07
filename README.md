@@ -18,6 +18,24 @@ You can find his work about this at
  * hackaday : [wiring and reverse engineering](https://hackaday.io/project/171155-fanatec-clubsport-shifter-sq-v15-usb-adapter-diy)
  * github : [arduino code](https://gist.github.com/summivox/cfbcb8d309d416cefc3c0df10379339f)
 
+## Wiring
+I used an RJ12 jack (6P6C) so I could plug the cable bundled with the shifter.
+
+Wire as following :
+
+| RJ12  | Teensy LC |
+| ----- | --------- |
+| pin 1 | GND       |
+| pin 2 | unused    |
+| pin 3 | pin 14    |
+| pin 4 | pin 15    |
+| pin 5 | pin 16    |
+| pin 6 | 3.3V      |
+
+ Warning : do not use 5V if your microcontroller's pins aren't 5V tolerant !
+
+You can of course use other pins, adjust the code as necessary.
+
 ## X axis
 
 I decided to implement software hysteresis instead of traditional debouncing. Mostly for fun, I guess...

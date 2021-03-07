@@ -32,12 +32,12 @@ I tried to auto-calibrate the X axis, with mixed results. It almost works, but a
 I ended up hard-coding the values.
 If you need to adjust these for your shifter :
 
- * Activate debug (uncomment [this line](https://github.com/trigger7/FanatecShifterUSBAdapter/blob/f0937c960d81fabd83f9cbca7249cea6fe212ee8/src/main.cpp#L5))
+ * Activate debug (uncomment [this line](https://github.com/trigger7/FanatecShifterUSBAdapter/blob/main/src/main.cpp#L5))
  * Upload the code onto your microcontroller
  * Open the serial monitor
  * Engage each odd gears (including 7th and reverse) and look at the X value on the serial monitor
 * Take note of the average value for each gear
-* Replace the values [here](https://github.com/trigger7/FanatecShifterUSBAdapter/blob/f0937c960d81fabd83f9cbca7249cea6fe212ee8/src/main.cpp#L57) with yours, in ascending order (7th, 5th, 3rd, 1st, reverse). The 32 at the end is the deadband for hysteresis, leave it as is.
+* Replace the values [here](https://github.com/trigger7/FanatecShifterUSBAdapter/blob/main/src/main.cpp#L70) with yours, in descending raw value, ascending gear order (reverse, 1st, 3rd, 5th, 7th). The 32 at the end is the deadband for hysteresis, leave it as is.
 * Recompile and reupload
 
 ## Y axis

@@ -66,6 +66,7 @@ class HShifter : public Printable
 // Tune threshold and deadband numbers if not using 11 bits ADC
 Hysteresis<uint16_t> SeqX = Hysteresis<uint16_t>(1024, 128);
 Hysteresis<uint16_t> SeqY = Hysteresis<uint16_t>(1024, 128);
+// Average X value for gear :              R    1st   3rd  5th  7th
 HShifter<uint16_t> H = HShifter<uint16_t>(1495, 1165, 775, 425, 135, 32,
                                           512, 1536, 256);
 

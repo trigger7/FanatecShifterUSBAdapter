@@ -116,7 +116,10 @@ void loop() {
   } else {
     const int8_t gear = H.update(x, y);
     if (old_gear != gear) {
-      if (gear > 0) Joystick.button(gear, true); // Not neutral or reverse
+      // We only engage a gear from neutral (old_gear == 0)
+      // This is necessary because during fast shifts, the Y axis would lag behind the X axis
+      // As a result, for example, the 4th gear would briefly register during a 2nd to 3rd shift
+      if (gear > 0 and old_gear == 0) Joystick.button(gear, true); // Not neutral or reverse
       if (gear == -1) Joystick.button(8, true); // Reverse
       if (old_gear > 0) Joystick.button(old_gear, false);
       if (old_gear == -1) Joystick.button(8, false);

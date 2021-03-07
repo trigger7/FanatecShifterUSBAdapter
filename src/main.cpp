@@ -2,7 +2,7 @@
 #include "Smooth.h"
 #include "Hysteresis.h"
 
-#define DEBUG
+//#define DEBUG
 
 
 template <typename T>
@@ -10,6 +10,8 @@ class HShifter : public Printable
 {
   public:
     int8_t gear = 0;
+    HShifter(T reverse, T first, T third, T fifth, T seventh, T x_deadband, T down, T up, T y_deadband) :
+       _HX(seventh, fifth, third, first, reverse, x_deadband), _HY(down, up, y_deadband) {}
     int8_t update(T x, T y)
     {
       _HX.update(x);
@@ -53,9 +55,8 @@ class HShifter : public Printable
     }
 
   private:
-    // Tune threshold and deadband numbers if not using 11 bits ADC
-    FiveWayHysteresis<T> _HX = FiveWayHysteresis<T>(135, 425, 775, 1165, 1495, 32);
-    ThreeWayHysteresis<T> _HY = ThreeWayHysteresis<T>(512, 1536, 256);
+    FiveWayHysteresis<T> _HX;
+    ThreeWayHysteresis<T> _HY;
 };
 
 
@@ -65,7 +66,8 @@ class HShifter : public Printable
 // Tune threshold and deadband numbers if not using 11 bits ADC
 Hysteresis<uint16_t> SeqX = Hysteresis<uint16_t>(1024, 128);
 Hysteresis<uint16_t> SeqY = Hysteresis<uint16_t>(1024, 128);
-HShifter<uint16_t> H = HShifter<uint16_t>();
+HShifter<uint16_t> H = HShifter<uint16_t>(1495, 1165, 775, 425, 135, 32,
+                                          512, 1536, 256);
 
 // Used to remember previous values and update Joystick buttons only when necessary
 bool old_down = false;

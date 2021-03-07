@@ -86,13 +86,10 @@ class FiveWayHysteresis : public Printable
                                                                         _high(high, deadband),
                                                                         _highest(highest, deadband) {}
     // Constructor with 5 targets and a deadband
-    FiveWayHysteresis(T lowest, T low, T mid, T high, T highest, T deadband)
-    {
-      _lowest((lowest + low) / 2, deadband);
-      _low((low + mid) / 2, deadband);
-      _high((mid + high) / 2, deadband);
-      _highest((high + highest) / 2, deadband);
-    }
+    FiveWayHysteresis(T lowest, T low, T mid, T high, T highest, T deadband) : _lowest((lowest + low) / 2, deadband),
+                                                                               _low((low + mid) / 2, deadband),
+                                                                               _high((mid + high) / 2, deadband),
+                                                                               _highest((high + highest) / 2, deadband) {}
     void update(const T value)
     {
       highest = _highest.update(value);

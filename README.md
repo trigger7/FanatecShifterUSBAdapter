@@ -45,6 +45,16 @@ The Y axis seems very stable and consistent, it shouldn't need any adjustment.
 
 ## Extra stuff
 
+### USB Device name
+I've included a file to customize the USB name under which the Teensy will appear. The Vendor ID and Product ID, however, are still the same.
+
+If you are using or have been using a Teensy LC (or the same model as the one you're making your shifter adapter with), you may encounter issues because Windows is caching device names.
+
+In this case, you can either :
+ * remove usb_name.c and use the default name
+ * create a custom Vendor/Product ID (no easy way to do this ; search PJRC forum)
+ * open the Windows registry and do some clean-up (at your own risk !)
+
 ### Other microcontrollers
 Other microcontrollers will probably work too. Other Teensys (Teensies?) in particular shouldn't need any modification.
 

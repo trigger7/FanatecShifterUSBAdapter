@@ -8,3 +8,5 @@ struct usb_string_descriptor_struct usb_string_product_name = {
   3,
   PRODUCT_NAME
 };
+
+// Set usb_desc.h to #define PRODUCT_ID		0x0583

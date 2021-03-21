@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "Smooth.h"
 #include "Hysteresis.h"
+#include <Bounce.h>
 
 //#define DEBUG
 
@@ -75,12 +76,15 @@ bool old_down = false;
 bool old_up = false;
 int8_t old_gear = 0;
 
+Bounce handbrake = Bounce(23, 10);
+
 
 void setup() {
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
-  pinMode(14, INPUT);
+  pinMode(14, INPUT);  // Shifter Seq
+  pinMode(23, INPUT);  // Handbrake
   analogReadResolution(11); // 12 bits ADC is very jittery and offers no extra info over 11 bits
   Joystick.useManualSend(true);
   // Center everything
@@ -147,4 +151,14 @@ void loop() {
     Serial.println(H);
   }
 #endif
+
+  handbrake.update();
+  if (handbrake.risingEdge()) {
+    Joystick.button(11, false);
+    Joystick.send_now();
+  }
+  if (handbrake.fallingEdge()) {
+    Joystick.button(11, true);
+    Joystick.send_now();
+  }
 }
